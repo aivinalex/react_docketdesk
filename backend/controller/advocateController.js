@@ -7,7 +7,7 @@ export default async function advocateController(req, reply) {
   const data = await advocateSearch(name);
   if (!data || data.length === 0)
     throw req.server.httpErrors.notFound("Advocate not found");
-  console.log(data);
+
   return {
     count: data.length,
     results: data,

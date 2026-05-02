@@ -122,7 +122,7 @@ export const initEventListeners = function () {
     const id = e.target.closest("[data-id]")?.dataset.id;
 
     try {
-      const res = await fetch(`download/pdf/${id}`);
+      const res = await fetch(`/download/pdf/${encodeURIComponent(id)}`);
 
       if (!res.ok) {
         let message = "Download failed";
