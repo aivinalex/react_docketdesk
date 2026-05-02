@@ -64,8 +64,6 @@ export function createHtml(data: Response): string {
 }
 
 const rowCreate = function (data: Response): string {
-  console.log(data);
-
   const rows = data.causelist
     .map((el, i) => {
       return `<tr>

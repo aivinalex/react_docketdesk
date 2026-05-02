@@ -25,4 +25,5 @@ model.txt
 node_modules/
 dist/
 *.tgz
+
 public/output.css
