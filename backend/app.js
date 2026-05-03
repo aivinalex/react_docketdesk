@@ -2,6 +2,7 @@
 import Fastify from "fastify";
 import fastifyStatic from "@fastify/static";
 import path from "path";
+import { fileURLToPath } from "url";
 import {
   advocateRoutes,
   causeListRoute,
@@ -12,6 +13,8 @@ import sensible from "@fastify/sensible";
 import errorHandler from "./helpers/errorHandler.js";
 
 export default function buildApp() {
+  const _filename = fileURLToPath(import.meta.url);
+  const _dirname = path.dirname(_filename);
   const app = Fastify({
     logger: process.env.NODE_ENV === "production" ? "warn" : "info",
   });
@@ -19,7 +22,7 @@ export default function buildApp() {
   app.decorate("fileStore", new Map());
   app.register(sensible);
   app.register(fastifyStatic, {
-    root: path.join(process.cwd(), "public"),
+    root: path.join(_dirname, "../public"),
   });
 
   app.register(advocateRoutes, { prefix: "/api" });
