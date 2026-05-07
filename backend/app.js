@@ -20,6 +20,8 @@ export default function buildApp() {
   });
 
   app.decorate("fileStore", new Map());
+  app.server.keepAliveTimeout = 0;
+  app.server.headersTimeout = 0;
   app.register(sensible);
   app.register(fastifyStatic, {
     root: path.join(_dirname, "../public"),
