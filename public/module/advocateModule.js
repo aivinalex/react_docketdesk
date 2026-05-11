@@ -59,7 +59,7 @@ export const advocateDetail = {
     this.selectedAdvocates.forEach((element) => {
       const newPill = document.createElement("div");
       newPill.className =
-        "flex items-center gap-2 px-3 py-1 bg-[#f4ecd8] border border-[#c9b79c] rounded-full text-sm text-[#5a4a33] shadow-sm animate-fadeIn";
+        "flex items-center gap-1 sm:gap-2 px-2 py-0.5 sm:px-3 sm:py-1 bg-[#f4ecd8] border border-[#c9b79c] rounded-full text-xs sm:text-sm text-[#5a4a33] shadow-sm animate-fadeIn";
 
       const newSpan = document.createElement("span");
       newSpan.className = "font-medium";
@@ -74,7 +74,7 @@ export const advocateDetail = {
       newPill.appendChild(newSpan);
       newPill.appendChild(closeBtnCreate);
       advocateSelectionContainer.appendChild(newPill);
-      console.log("reached here");
+
       this.clearSuggestion();
       nodesModule.searchData.value = "";
     });
