@@ -2,7 +2,7 @@
 import advocateSearchSchema from "../schemas/advocateSchema.js";
 import advocateController from "../controller/advocateController.js";
 import causelistController from "../controller/causelistContoller.js";
-import { downloadPdf } from "../controller/downloadController.js";
+import { downloadPdf ,downloadWord} from "../controller/downloadController.js";
 
 export async function advocateRoutes(app) {
   app.get("/advocates", advocateSearchSchema, advocateController);
@@ -23,4 +23,5 @@ export async function statusCheckRoute(app) {
 }
 export async function downloadRoute(app) {
   app.get("/pdf/:id", downloadPdf);
+  app.get("/word/:id", downloadWord);
 }

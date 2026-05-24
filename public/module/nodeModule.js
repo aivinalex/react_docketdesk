@@ -17,6 +17,7 @@ const selectors = {
   tableRowTemplate: "#row-template",
   loadingOverlay: "#loading-overlay",
   downloadPdf: "#pdf-download",
+  downloadWord: "#word-download",
 };
 
 export const nodesModule = Object.fromEntries(

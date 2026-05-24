@@ -41,7 +41,8 @@ export const isLoading = function (state) {
 };
 
 export const buttonId = function (id) {
-  const{ downloadPdf} = nodesModule
+  const { downloadPdf, downloadWord } = nodesModule;
   downloadPdf.setAttribute("data-id", id);
+  downloadWord.setAttribute("data-id", id);
   console.log(`id ${id} set`);
 };

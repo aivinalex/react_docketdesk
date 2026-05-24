@@ -20,6 +20,7 @@ export const initEventListeners = function () {
     searchBody,
     causelistContainer,
     downloadPdf,
+    downloadWord,
   } = nodesModule;
 
   [searchData, searchDate].forEach((input) => {
@@ -114,7 +115,7 @@ export const initEventListeners = function () {
       createMessage({
         message: err.message,
         messageType: "warning",
-        title:""
+        title: "",
       });
     }
   });
@@ -151,6 +152,57 @@ export const initEventListeners = function () {
       window.URL.revokeObjectURL(url);
     } catch (err) {
       console.log(err);
+      createMessage({
+        message: err.message,
+        messageType: "error",
+        title: "",
+      });
+    }
+  });
+  downloadWord.addEventListener("click", async (e) => {
+    const id = e.target.closest("[data-id]")?.dataset.id;
+
+    try {
+      const res = await fetch(`/download/word/${encodeURIComponent(id)}`);
+
+      if (!res.ok) {
+        let message = "Download failed";
+
+        try {
+          const data = await res.json();
+
+          message = data.message || message;
+        } catch {
+          const text = await res.text();
+
+          message = text || message;
+        }
+
+        throw new Error(message);
+      }
+
+      const blob = await res.blob();
+
+      const disposition = res.headers.get("Content-Disposition");
+
+      const fileName =
+        disposition?.split("filename=")[1]?.replace(/"/g, "") ||
+        "causelist.word";
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+
+      a.href = url;
+
+      a.download = fileName;
+
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.log(err);
+
       createMessage({
         message: err.message,
         messageType: "error",
