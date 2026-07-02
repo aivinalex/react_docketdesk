@@ -31,6 +31,7 @@ const delayedSearch = async function (searchParamsArray) {
       if (html.includes("No cases!")) {
         results.push({
           advocate: searchParamsArray[i].advocate,
+          advoCode: searchParamsArray[i].advoCode,
           caselist: null,
           success: true,
         });
@@ -39,6 +40,7 @@ const delayedSearch = async function (searchParamsArray) {
 
       results.push({
         advocate: searchParamsArray[i].advocate,
+        advoCode: searchParamsArray[i].advoCode,
         caselist: parseCauseList(html),
         success: true,
       });
@@ -46,7 +48,7 @@ const delayedSearch = async function (searchParamsArray) {
       console.error(`Failed to fetch advocate ${i + 1}:`, err.message);
       results.push({
         advocate: searchParamsArray[i].advocate,
-
+        advoCode: searchParamsArray[i].advoCode,
         caselist: [],
         success: false,
       });
@@ -65,6 +67,7 @@ export const causelistSearch = async function (
   if (!advocates.length) return [];
   const searchUrlArray = advocates.map((x) => ({
     advocate: x.name,
+    advoCode: x.advoCode,
     searchURL: new URLSearchParams({
       advocate_name: encode(x.name),
       from_date: date,
